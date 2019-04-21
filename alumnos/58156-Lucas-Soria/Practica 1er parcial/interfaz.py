@@ -13,9 +13,5 @@ def main():
     print(main.resultado)
 
 
-'''
-while True:
-    main()
-    if main.resultado != "":
-        break
-'''
+
+main()
