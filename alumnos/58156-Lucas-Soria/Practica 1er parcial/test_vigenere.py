@@ -1,5 +1,5 @@
 import unittest
-from vigenere import vigenere
+from vigenere import *
 
 
 
@@ -13,16 +13,26 @@ class TestVigenere(unittest.TestCase):
         self.assertEqual(result, 'edowkhvov')
     
     def test_palabra_con_signos(self):
-        result = vigenere('como estas!')
-        self.assertEqual(result, 'Ingresaste un caracter no permitido')
+        try:
+            vigenere('como estas!')
+            self.fail()
+        except Exception_simbolo:
+            pass
     
     def test_palabra_con_numero(self):
-        result = vigenere('tengo 3 patos')
-        self.assertEqual(result, 'Ingresaste un caracter no permitido')
+        try:
+            vigenere('tengo 3 patos')
+            self.fail()
+        except Exception_numero:
+            pass
     
     def test_palabra_corto(self):
-        result = vigenere('hola')
-        self.assertEqual(result, 'Ingresaste un caracter no permitido')
+        try:
+            vigenere('hola')
+            self.fail()
+        except Exception_corto:
+            pass
+        
 
 
 if __name__ == "__main__":

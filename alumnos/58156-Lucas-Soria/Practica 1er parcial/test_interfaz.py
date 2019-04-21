@@ -14,17 +14,25 @@ class TestInterfazVigenere(unittest.TestCase):
         self.assertEqual(result, 'edowkhvov')
     
     def test_palabra_con_signos(self):
-        result = interfaz('como estas!')
-        self.assertEqual(result, 'Ingresaste un caracter no permitido')
+        try:
+            interfaz('como estas!')
+            self.fail()
+        except:
+            pass
     
     def test_palabra_con_numero(self):
-        result = interfaz('tengo 3 patos')
-        self.assertEqual(result, 'Ingresaste un caracter no permitido')
+        try:
+            interfaz('tengo 3 patos')
+            self.fail()
+        except:
+            pass
     
     def test_palabra_corto(self):
-        result = interfaz('hola')
-        self.assertEqual(result, 'Ingresaste un caracter no permitido')
-
+        try:
+            interfaz('hola')
+            self.fail()
+        except:
+            pass
 
 if __name__ == '__main__':
     unittest.main()

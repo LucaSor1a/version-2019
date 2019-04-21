@@ -2,17 +2,20 @@ from vigenere import vigenere
 
 
 def interfaz(mensaje):
-    interfaz.resultado = vigenere(mensaje)
-    return interfaz.resultado
+    resultado = vigenere(mensaje)
+    return resultado
 
 
 
 def main():
     mensaje = input("Ingrese el mensaje a codificar: ")
-    interfaz(mensaje)
-    print(interfaz.resultado)
+    main.resultado = interfaz(mensaje)
+    print(main.resultado)
 
+
+'''
 while True:
     main()
-    if interfaz.resultado != "Ingresaste un caracter no permitido":
+    if main.resultado != "":
         break
+'''
