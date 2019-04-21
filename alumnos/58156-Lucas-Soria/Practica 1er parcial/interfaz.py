@@ -9,8 +9,8 @@ def interfaz(mensaje):
 
 def main():
     mensaje = input("Ingrese el mensaje a codificar: ")
-    main.resultado = interfaz(mensaje)
-    print(main.resultado)
+    resultado = interfaz(mensaje)
+    print(resultado)
 
 
 
