@@ -134,9 +134,10 @@ class TestPremium5(unittest.TestCase):
         self.cafe.mc = False
     
     def test_mcrn(self):
+        self.cafe.mcrn.cafe = 5
         self.assertEqual(self.cafe.mcrn(True), "Perdon, no hay suficiente cafe")
 
-class TestPremium5(unittest.TestCase):
+class TestPremium6(unittest.TestCase):
     def setUp(self):
         self.cafe = premium(500,0,50,23)
         self.cafe.agua = 100
@@ -146,6 +147,8 @@ class TestPremium5(unittest.TestCase):
         self.cafe.mc = False
     
     def test_mcrn(self):
+        self.cafe.mcrn.cafe = 5
+        self.cafe.mcrn.azucar = 5
         self.assertEqual(self.cafe.mcrn(True), "Perdon, no hay suficiente azucar")
 
 #----------------------------------------------------------------------
