@@ -1,156 +1,116 @@
 import unittest
 from cafecitooo import (
-    cafecito,
-    premium,
-)
+   Cafezote,
+   Cafecito,
+   Premium)
+
+#-------------------------------------------Cafecito------------------------------------------
+
+class TestCafecito(unittest.TestCase):
 
 
-class TestCafecito1(unittest.TestCase):
     def setUp(self):
-        self.cafe = cafecito(500,50,50,23)
-        self.cafe.agua = 500
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
+        self.cafecito = Cafecito(500,200,200,0,False,100)
+        self.cafecito.money = 400
+        self.cafecito.azucaf = 1
 
-    def test_startcoffee(self):
-        self.assertEqual(self.cafe.startcoffee(5), None)
-        self.assertEqual(self.cafe.agua, 400)
-        self.assertEqual(self.cafe.cafe, 45)
-        self.assertEqual(self.cafe.azucar, 45)
-        self.assertEqual(self.cafe.moneda, 24)
+    def test_hacercafe_EXITO(self):
+        self.assertTrue(self.cafecito.hacer_cafe())
+        self.assertEqual(self.cafecito.agua, 400)
+        self.assertEqual(self.cafecito.cafe, 180)
+        self.assertEqual(self.cafecito.azucar, 195)
+        self.assertEqual(self.cafecito.dinero, 500)
 
-class TestCafecito2(unittest.TestCase):
-    def setUp(self):
-        self.cafe = cafecito(500,50,50,23)
-        self.cafe.agua = 500
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
+    def test_hacercafe_no_agua(self):
+        self.cafecito.agua = 0
+        self.assertFalse(self.cafecito.hacer_cafe())
+        self.assertEqual(self.cafecito.agua, 0)
+        self.assertEqual(self.cafecito.cafe, 200)
+        self.assertEqual(self.cafecito.azucar, 200)
+        self.assertEqual(self.cafecito.dinero, 100)
+
+    def test_hacercafe_no_cafe(self):
+       self.cafecito.cafe = 0
+       self.assertFalse(self.cafecito.hacer_cafe())
+       self.assertEqual(self.cafecito.agua, 500)
+       self.assertEqual(self.cafecito.cafe, 0)
+       self.assertEqual(self.cafecito.azucar, 200)
+       self.assertEqual(self.cafecito.dinero, 100)
     
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(False), "Poner una moneda")
-
-class TestCafecito3(unittest.TestCase):
-    def setUp(self):
-        self.cafe = cafecito(500,50,50,23)
-        self.cafe.agua = 500
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = True
+    def test_hacercafe_no_azucar_y_quiere(self):
+       self.cafecito.azucar = 0
+       self.assertFalse(self.cafecito.hacer_cafe())
+       self.assertEqual(self.cafecito.agua, 500)
+       self.assertEqual(self.cafecito.cafe, 200)
+       self.assertEqual(self.cafecito.azucar, 0)
+       self.assertEqual(self.cafecito.dinero, 100)
     
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(True), "Todavia se esta haciendo un cafe, espere")
-
-class TestCafecito4(unittest.TestCase):
-    def setUp(self):
-        self.cafe = cafecito(50,50,50,23)
-        self.cafe.agua = 50
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
+    def test_hacercafe_no_azucar_y_no_quiere(self):
+       self.cafecito.azucar = 0
+       self.cafecito.azucaf = 0
+       self.assertTrue(self.cafecito.hacer_cafe())
+       self.assertEqual(self.cafecito.agua, 400)
+       self.assertEqual(self.cafecito.cafe, 180)
+       self.assertEqual(self.cafecito.azucar, 0)
+       self.assertEqual(self.cafecito.dinero, 500)
     
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(True), "No hay suficiente agua")
+#-------------------------------------------Premium-------------------------------------------
 
-class TestCafecito5(unittest.TestCase):
+class TestPremium(unittest.TestCase):
+
+
     def setUp(self):
-        self.cafe = cafecito(500,0,50,23)
-        self.cafe.agua = 100
-        self.cafe.cafe = 0
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
+        self.premium = Premium(500,200,200,500,True,100)
+        self.premium.money = 400
+        self.premium.azucaf = 5
+        self.premium.cafcaf = 20
+        self.premium.leccaf = 50
+
+    def test_hacercafe_EXITO_default(self):
+        self.assertTrue(self.premium.hacer_cafe())
+        self.assertEqual(self.premium.agua, 450)
+        self.assertEqual(self.premium.cafe, 180)
+        self.assertEqual(self.premium.azucar, 195)
+        self.assertEqual(self.premium.leche, 450)
+        self.assertEqual(self.premium.dinero, 500)
+
+    def test_hacercafe_no_agua(self):
+        self.premium.agua = 0
+        self.assertFalse(self.premium.hacer_cafe())
+        self.assertEqual(self.premium.agua, 0)
+        self.assertEqual(self.premium.cafe, 200)
+        self.assertEqual(self.premium.azucar, 200)
+        self.assertEqual(self.premium.leche, 500)
+        self.assertEqual(self.premium.dinero, 100)
+
+    def test_hacercafe_no_cafe(self):
+       self.premium.cafe = 0
+       self.assertFalse(self.premium.hacer_cafe())
+       self.assertEqual(self.premium.agua, 500)
+       self.assertEqual(self.premium.cafe, 0)
+       self.assertEqual(self.premium.azucar, 200)
+       self.assertEqual(self.premium.leche, 500)
+       self.assertEqual(self.premium.dinero, 100)
     
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(True), "Perdon, no hay suficiente cafe")
-
-
-#--------------------------------PREMIUM--------------------------------
-
-class TestPremium1(unittest.TestCase):
-    def setUp(self):
-        self.cafe = premium(500,50,50,23)
-        self.cafe.agua = 500
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
-
-    def test_startcoffee(self):
-        self.assertEqual(self.cafe.startcoffee(1,3), None)
-        self.assertEqual(self.cafe.agua, 400)
-        self.assertEqual(self.cafe.cafe, 47)
-        self.assertEqual(self.cafe.azucar, 49)
-        self.assertEqual(self.cafe.moneda, 24)
-
-class TestPremium2(unittest.TestCase):
-    def setUp(self):
-        self.cafe = premium(500,50,50,23)
-        self.cafe.agua = 500
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
+    def test_hacercafe_no_azucar_y_quiere(self):
+       self.premium.azucar = 0
+       self.assertFalse(self.premium.hacer_cafe())
+       self.assertEqual(self.premium.agua, 500)
+       self.assertEqual(self.premium.cafe, 200)
+       self.assertEqual(self.premium.azucar, 0)
+       self.assertEqual(self.premium.leche, 500)
+       self.assertEqual(self.premium.dinero, 100)
     
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(False), "Poner una moneda")
+    def test_hacercafe_no_azucar_y_no_quiere(self):
+       self.premium.azucar = 0
+       self.premium.azucaf = 0
+       self.assertTrue(self.premium.hacer_cafe())
+       self.assertEqual(self.premium.agua, 450)
+       self.assertEqual(self.premium.cafe, 180)
+       self.assertEqual(self.premium.azucar, 0)
+       self.assertEqual(self.premium.leche, 450)
+       self.assertEqual(self.premium.dinero, 500)
 
-class TestPremium3(unittest.TestCase):
-    def setUp(self):
-        self.cafe = premium(500,50,50,23)
-        self.cafe.agua = 500
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = True
-    
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(True), "Todavia se esta haciendo un cafe, espere")
-
-class TestPremium4(unittest.TestCase):
-    def setUp(self):
-        self.cafe = premium(50,50,50,23)
-        self.cafe.agua = 50
-        self.cafe.cafe = 50
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
-    
-    def test_mcrn(self):
-        self.assertEqual(self.cafe.mcrn(True), "No hay suficiente agua")
-
-class TestPremium5(unittest.TestCase):
-    def setUp(self):
-        self.cafe = premium(500,0,50,23)
-        self.cafe.agua = 100
-        self.cafe.cafe = 0
-        self.cafe.azucar = 50
-        self.cafe.moneda = 23
-        self.cafe.mc = False
-    
-    def test_mcrn(self):
-        self.cafe.mcrn.cafe = 5
-        self.assertEqual(self.cafe.mcrn(True), "Perdon, no hay suficiente cafe")
-
-class TestPremium6(unittest.TestCase):
-    def setUp(self):
-        self.cafe = premium(500,0,50,23)
-        self.cafe.agua = 100
-        self.cafe.cafe = 50
-        self.cafe.azucar = 0
-        self.cafe.moneda = 23
-        self.cafe.mc = False
-    
-    def test_mcrn(self):
-        self.cafe.mcrn.cafe = 5
-        self.cafe.mcrn.azucar = 5
-        self.assertEqual(self.cafe.mcrn(True), "Perdon, no hay suficiente azucar")
-
-#----------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------
 if __name__ == "__main__":
-    unittest.main()
+   unittest.main()
